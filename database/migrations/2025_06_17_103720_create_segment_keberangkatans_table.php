@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('segment_keberangkatans', function (Blueprint $table) {
             $table->id();
+            $table->integer('sequence');
+            $table->foreignId('id_keberangkatan')->constrained()->cascadeOnDelete();
+            $table->foreignId('id_destinasi')->constrained()->cascadeOnDelete();
+            $table->dateTime('time');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

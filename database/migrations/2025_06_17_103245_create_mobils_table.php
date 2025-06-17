@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('mobils', function (Blueprint $table) {
             $table->id();
-            $table->string('rute_perjalanan');
-            $table->string('gambar');
-            $table->string('kota');
+            $table->string('nomor_plat');
+            $table->string('nama_mobil');
+            $table->string('jenis_mobil');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
