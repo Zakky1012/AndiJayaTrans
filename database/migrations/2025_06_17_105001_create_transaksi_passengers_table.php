@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('transaksi_passengers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transaksi_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('kursi_keberangkatan_id')->constrained()->cascadeOnDelete();
+            $table->string('nama');
+            $table->date('tanggal_lahir');
+            $table->string('kewarganegaraan');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

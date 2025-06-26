@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('kursi_keberangkatans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_keberangkatan')->constrained()->cascadeOnDelete();
+            $table->foreignId('keberangkatan_id')->constrained()->cascadeOnDelete();
             $table->string('row');
             $table->string('column');
             $table->enum('tipe_kelas', ['ekonomi', 'premium']);
-            $table->boolean('is_available');
+            $table->boolean('is_available')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

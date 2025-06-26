@@ -12,8 +12,8 @@ class SegmentKeberangkatan extends Model
 
     protected $fillable = [
         'sequence',
-        'id_keberangkatan',
-        'id_destinasi',
+        'keberangkatan_id',
+        'destinasi_id',
         'time'
     ];
 }

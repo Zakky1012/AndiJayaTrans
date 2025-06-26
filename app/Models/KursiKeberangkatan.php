@@ -11,7 +11,7 @@ class KursiKeberangkatan extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'id_keberangkatan',
+        'keberangkatan_id',
         'row',
         'column',
         'tipe_kelas',

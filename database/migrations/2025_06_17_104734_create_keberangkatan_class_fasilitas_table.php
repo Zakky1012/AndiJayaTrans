@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('keberangkatan_class_fasilitas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kelas_keberangkatan')->references('id')->onDelete('cascade');
-            $table->foreignId('id_fasilitas
-            ')->references('id')->onDelete('cascade');
+            $table->foreignId('kelas_keberangkatan_id')->references('id')->on('class_keberangkatans')->onDelete('cascade');
+            $table->foreignId('fasilitas_id
+            ')->references('id')->on('fasilitas')->onDelete('cascade');
             $table->timestamps();
         });
     }
