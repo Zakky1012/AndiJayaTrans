@@ -15,6 +15,6 @@ class PromoCode extends Model
         'tipe_diskon',
         'diskon',
         'valid',
-        'is_used',
+        'is_used'
     ];
 }

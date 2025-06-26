@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('keberangkatans', function (Blueprint $table) {
             $table->id();
             $table->string('nomor_keberangkatan');
-            $table->foreignId('mobil_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('mobil_id')->references('id')->on('mobils')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

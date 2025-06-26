@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->enum('tipe_diskon', ['fixed', 'percentage']);
-            $table->int('diskon');
+            $table->integer('diskon');
             $table->dateTime('valid');
             $table->boolean('is_used')->default(false);
             $table->softDeletes();
