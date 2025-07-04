@@ -15,4 +15,8 @@ class Destinasi extends Model
         'gambar',
         'kota'
     ];
+
+    public function segmentKeberangkatan(){
+        return $this->hasMany(SegmentKeberangkatan::class);
+    }
 }

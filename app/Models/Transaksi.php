@@ -23,4 +23,20 @@ class Transaksi extends Model
         'sub_total',
         'grand_total',
     ];
+
+    public function keberangkatan(){
+        return $this->belongsTo(Keberangkatan::class);
+    }
+
+    public function classKeberangkatan(){
+        return $this->belongsTo(ClassKeberangkatan::class);
+    }
+
+    public function promoCode(){
+        return $this->belongsTo(PromoCode::class);
+    }
+
+    public function transaksiPessenger(){
+        return $this->hasMany(TransaksiPassenger::class);
+    }
 }

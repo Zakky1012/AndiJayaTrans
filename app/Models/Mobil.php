@@ -16,4 +16,7 @@ class Mobil extends Model
         'jenis_mobil'
     ];
 
+    public function keberangkatans(){
+        return $this->hasMany(Keberangkatan::class);
+    }
 }

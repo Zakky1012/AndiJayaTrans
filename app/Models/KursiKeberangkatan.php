@@ -17,4 +17,8 @@ class KursiKeberangkatan extends Model
         'tipe_kelas',
         'is_available'
     ];
+
+    public function keberangkatan(){
+        return $this->belongsTo(Keberangkatan::class);
+    }
 }

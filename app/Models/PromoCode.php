@@ -17,4 +17,8 @@ class PromoCode extends Model
         'valid',
         'is_used'
     ];
+
+    public function transaksi(){
+        return $this->hasOne(Transaksi::class);
+    }
 }

@@ -17,4 +17,9 @@ class TransaksiPassenger extends Model
         'tanggal_lahir',
         'kewarganeraan',
     ];
+
+    public function transaksi(){
+        return $this->belongsTo(Transaksi::class);
+    }
+
 }

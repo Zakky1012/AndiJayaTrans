@@ -16,4 +16,16 @@ class ClassKeberangkatan extends Model
         'harga',
         'total_kursi'
     ];
+
+    public function keberangkatan(){
+        return $this->belongsTo(Keberangkatan::class);
+    }
+
+    public function fasilitas(){
+        return $this->belongsToMany(Fasilitas::class, 'keberangkatan_class_fasilitas', 'kelas_keberangkatan_id', 'fasilitas_id');
+    }
+
+    public function transaksi(){
+        return $this->belongsTo(Transaksi::class);
+    }
 }

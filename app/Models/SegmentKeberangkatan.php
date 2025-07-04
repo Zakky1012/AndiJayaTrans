@@ -16,4 +16,12 @@ class SegmentKeberangkatan extends Model
         'destinasi_id',
         'time'
     ];
+
+    public function keberangkatan(){
+        return $this->belongsTo(Keberangkatan::class);
+    }
+
+    public function destinasi(){
+        return $this->belongsTo(Destinasi::class);
+    }
 }
