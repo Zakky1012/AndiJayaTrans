@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kursi_keberangkatans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('keberangkatan_id')->constrained()->cascadeOnDelete();
+            $table->string('name');
             $table->string('row');
             $table->string('column');
             $table->enum('tipe_kelas', ['ekonomi', 'premium']);
