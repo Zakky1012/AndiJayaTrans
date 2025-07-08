@@ -12,7 +12,6 @@ class KursiKeberangkatan extends Model
 
     protected $fillable = [
         'keberangkatan_id',
-        'name',
         'row',
         'column',
         'tipe_kelas',

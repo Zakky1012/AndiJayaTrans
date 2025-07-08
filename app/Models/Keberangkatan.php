@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use PhpParser\Builder\Class_;
 
 class Keberangkatan extends Model
 {
@@ -38,20 +37,20 @@ class Keberangkatan extends Model
 
     public function generateSeats()
     {
-        $classes = $this->classKeberangkatan();
+        $classes = $this->classKeberangkatan;
 
         foreach ($classes as $class) {
-            $totalSeats = $class->total_kursi;
-            $seatsPerRow = $this->getSeatsPerRow($class->tipe_kelas);
-            $rows = ceil($totalSeats / $seatsPerRow);
+            $totalSeats     = $class->total_seats;
+            $seatsPerRow    = $this->getSeatsPerRow($class->tipe_kelas);
+            $rows           = ceil($totalSeats / $seatsPerRow);
 
             $existingSeats = kursiKeberangkatan::where('keberangkatan_id', $this->id)
                 ->where('tipe_kelas', $class->tipe_kelas)
                 ->get();
 
-            $existingRows = $existingSeats->pluck('row')->toArray();
+            $existingRows   = $existingSeats->pluck('row')->toArray();
 
-            $seatCounter = 1;
+            $seatCounter    = 1;
 
             for ($row = 1; $row <= $rows; $row++) {
                 if (!in_array($row, $existingRows)) {
@@ -60,15 +59,12 @@ class Keberangkatan extends Model
                             break;
                         }
 
-                        $seatCode = $this->generateSeatCode($row, $column);
-
                         kursiKeberangkatan::create([
-                            'keberangkatan_id' => $this->id,
-                            'name' => $seatCode,
-                            'row' => $row,
-                            'column' => $column,
-                            'tipe_kelas' => $class->tipe_kelas,
-                            'is_available' => true,
+                            'keberangkatan_id'  => $this->id,
+                            'row'               => $row,
+                            'column'            => $column,
+                            'tipe_kelas'        => $class->tipe_kelas,
+                            'is_available'      => true,
                         ]);
 
                         $seatCounter++;
@@ -85,9 +81,9 @@ class Keberangkatan extends Model
         }
     }
 
-    protected function getSeatsPerRow($classType)
+    protected function getSeatsPerRow($tipeKelas)
     {
-        switch ($classType) {
+        switch ($tipeKelas) {
             case 'ekonomi':
                 return 2;
             case 'premium':
@@ -97,10 +93,4 @@ class Keberangkatan extends Model
         }
     }
 
-    private function generateSeatCode($row, $column)
-    {
-        $rowLetter = chr(64 + $row);
-
-        return $rowLetter . $column;
-    }
 }
