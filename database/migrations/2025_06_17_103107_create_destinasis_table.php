@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('destinasis', function (Blueprint $table) {
             $table->id();
+            $table->string('iata_code');
             $table->string('rute_perjalanan');
             $table->string('gambar');
             $table->string('kota');

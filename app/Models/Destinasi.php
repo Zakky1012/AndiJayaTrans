@@ -11,6 +11,7 @@ class Destinasi extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'iata_code',
         'rute_perjalanan',
         'gambar',
         'kota'

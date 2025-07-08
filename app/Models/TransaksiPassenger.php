@@ -22,4 +22,7 @@ class TransaksiPassenger extends Model
         return $this->belongsTo(Transaksi::class);
     }
 
+    public function kursi(){
+        return $this->belongsTo(KursiKeberangkatan::class);
+    }
 }

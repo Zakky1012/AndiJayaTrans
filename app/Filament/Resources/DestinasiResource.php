@@ -28,6 +28,8 @@ class DestinasiResource extends Resource
                     ->directory('destinasi')
                     ->required()
                     ->columnSpan(2),
+                Forms\Components\TextInput::make('iata_code')
+                    ->required(),
                 Forms\Components\TextInput::make('rute_perjalanan')
                     ->required(),
                 Forms\Components\TextInput::make('kota')
@@ -40,6 +42,7 @@ class DestinasiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('gambar'),
+                Tables\Columns\TextColumn::make('iata_code'),
                 Tables\Columns\TextColumn::make('rute_perjalanan'),
                 Tables\Columns\TextColumn::make('kota'),
             ])

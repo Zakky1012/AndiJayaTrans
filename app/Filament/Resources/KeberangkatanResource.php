@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\KeberangkatanResource\Pages;
 use App\Filament\Resources\KeberangkatanResource\RelationManagers;
 use App\Models\Keberangkatan;
+use DateTime;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -85,13 +86,25 @@ class KeberangkatanResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nomor_keberangkatan'),
+                Tables\Columns\TextColumn::make('mobil.nama_mobil'),
+                Tables\Columns\TextColumn::make('segmentKeberangkatan')
+                    ->label('Route & Duration')
+                    ->formatStateUsing(function (Keberangkatan $record): string {
+                        $firstSegment  = $record->segmentKeberangkatan->first();
+                        $lastSegment   = $record->segmentKeberangkatan->last();
+                        $route         = $firstSegment->destinasi->iata_code.' - '.$lastSegment->destinasi->iata_code;
+                        $duration      = (new DateTime($firstSegment->time))->format('d F Y H:i').' - '.(new DateTime($lastSegment->time))->format('d F Y H:i');
+                        return $route . ' | ' . $duration;
+                    }),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
