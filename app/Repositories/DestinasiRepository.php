@@ -1,6 +1,6 @@
 <?php 
 
-namespace Appp\Repositories;
+namespace App\Repositories;
 
 use App\Interfaces\DestinasiRepositoryInterface;
 use App\Models\Destinasi;

@@ -9,7 +9,7 @@ use App\Interfaces\TransaksiRepositoryInterface;
 use App\Repositories\KeberangkatanRepository;
 use App\Repositories\MobilRepository;
 use App\Repositories\TransaksiRepository;
-use Appp\Repositories\DestinasiRepository;
+use App\Repositories\DestinasiRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
