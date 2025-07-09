@@ -16,6 +16,6 @@ class HomeController extends Controller
     public function index(){
         $destinasis = $this->destinasiRepository->getAllDestinasis();
 
-        return view('pages.home', compact('destinasi'));
+        return view('pages.home', compact('destinasis'));
     }
 }
