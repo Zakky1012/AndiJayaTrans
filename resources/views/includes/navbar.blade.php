@@ -5,16 +5,16 @@
             </a>
             <ul class="flex items-center gap-[30px] flex-wrap">
                 <li>
-                    <a href="index.html" class="hover:font-bold transition-all duration-300 font-bold">Flights</a>
+                    <a href="index.html" class="hover:font-bold transition-all duration-300 font-bold">Keberangkatan</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:font-bold transition-all duration-300 ">Hotels</a>
+                    <a href="#" class="hover:font-bold transition-all duration-300 ">Hotel</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:font-bold transition-all duration-300 ">Schedule</a>
+                    <a href="#" class="hover:font-bold transition-all duration-300 ">Jadwal</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:font-bold transition-all duration-300 ">Testimonials</a>
+                    <a href="#" class="hover:font-bold transition-all duration-300 ">Testimoni</a>
                 </li>
             </ul>
             <div class="flex items-center gap-3">
