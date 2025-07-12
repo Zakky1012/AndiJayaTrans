@@ -13,11 +13,13 @@
         <h1 class="font-extrabold text-[50px] leading-[75px]">Explore Magical <br>Wonderful Worlds</h1>
         <p class="text-lg leading-8">Your truly great experience starts here with us <br>that lorem dolor amet si package exclusively matter.</p>
     </div>
-    <form action="available-flights.html" class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[86px]">
+    <form action="{{ route('keberangkatan.index') }}" method = "GET" class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[86px]">
         <div class="flex flex-col rounded-[30px] p-[30px] gap-4 bg-white">
             <h2 class="font-bold text-xl leading-[30px]">Book Your Next Travel</h2>
             <div class="flex items-center gap-5">
                 <div class="grid grid-cols-4 items-center rounded-[20px] border border-[#E8EFF7]">
+
+                    {{-- Departure Section --}}
                     <div id="Departure" class="dropdown-container relative flex items-center h-full border-r border-[#E8EFF7] last:border-r-0">
                         <button type="button" class="dropdown flex items-center gap-4 p-5 first:pl-6 first:border-l-0 last:pr-6 last:border-r-0" data-dropdown-target="#Departure-Dropdown">
                             <img src="assets/images/icons/departure.svg" class="w-[50px] flex shrink-0" alt="icon">
@@ -43,6 +45,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Arrival Section --}}
                     <div id="Arrival" class="dropdown-container relative flex items-center h-full border-r border-[#E8EFF7] last:border-r-0">
                         <button type="button" class="dropdown flex items-center gap-4 p-5 first:pl-6 last:pr-6" data-dropdown-target="#Arrival-Dropdown">
                             <img src="assets/images/icons/departure.svg" class="w-[50px] flex shrink-0" alt="icon">

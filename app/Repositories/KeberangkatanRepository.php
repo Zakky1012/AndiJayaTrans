@@ -15,7 +15,7 @@ class KeberangkatanRepository implements KeberangkatanRepositoryInterface {
           ->where('sequence', 1);
       });
     }
-    
+
     if(!empty($filter['arrival'])) {
       $keberangkatan->whereHas('segmentKeberangkatan', function ($query) use ($filter) {
         $query->where('keberangkatan_id', $filter['arrival'])
@@ -23,7 +23,7 @@ class KeberangkatanRepository implements KeberangkatanRepositoryInterface {
           ->limit(1);
       });
     }
-    
+
     if(!empty($filter['date'])) {
       $keberangkatan->whereHas('segmentKeberangkatan', function ($query) use ($filter) {
         $query->whereDate('time', $filter['date']);
