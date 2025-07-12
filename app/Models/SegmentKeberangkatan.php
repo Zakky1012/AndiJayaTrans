@@ -17,6 +17,10 @@ class SegmentKeberangkatan extends Model
         'time'
     ];
 
+    protected $casts = [
+        'time' => 'datetime'
+    ];
+
     public function keberangkatan(){
         return $this->belongsTo(Keberangkatan::class);
     }

@@ -16,9 +16,9 @@ class KeberangkatanRepository implements KeberangkatanRepositoryInterface {
       });
     }
     
-    if(!empty($filter['destinasi'])) {
+    if(!empty($filter['arrival'])) {
       $keberangkatan->whereHas('segmentKeberangkatan', function ($query) use ($filter) {
-        $query->where('keberangkatan_id', $filter['destinasi'])
+        $query->where('keberangkatan_id', $filter['arrival'])
           ->orderBy('sequence', 'desc')
           ->limit(1);
       });
