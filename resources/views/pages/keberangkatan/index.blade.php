@@ -79,7 +79,7 @@
                     <p class="font-semibold">Mobil</p>
                     @foreach($mobils as $mobil)
                       <label class="flex items-center gap-[10px]">
-                          <input type="checkbox" name="mobils" value="{{ $mobil->id }}" id=""
+                          <input type="checkbox" name="mobils" value="{{$mobil->id}}" id="mobils"
                               class="flex w-6 h-6 shrink-0 appearance-none outline-none rounded-lg ring-1 ring-garuda-black border border-white checked:bg-black checked:border-[5px]">
                           <div class="flex flex-col gap-[2px]">
                               <span class="font-semibold">{{ $mobil->nama_mobil }}</span>
@@ -134,7 +134,10 @@
                             <div class="flex items-center gap-[10px]">
                                 <div>
                                     <p class="font-semibold">{{ $keberangkatan->mobil->nama_mobil }}</p>
-                                    <p class="text-sm text-garuda-grey mt-[2px]">{{ $keberangkatan->segmentKeberangkatan->first()->time->format('H:i') }} - {{ $keberangkatan->segmentKeberangkatan->last()->time->format('H:i') }}</p>
+                                    <p class="text-sm text-garuda-grey mt-[2px]">
+                                        {{ $keberangkatan->segmentKeberangkatan->first()->time->format('H:i') }} -
+                                        {{ $keberangkatan->segmentKeberangkatan->last()->time->format('H:i') }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-[2px] items-center justify-center">
@@ -150,7 +153,9 @@
                                         {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->iata_code }}
                                     </p>
                                 </div>
-                                <p class="text-sm text-garuda-grey">Transit {{ $keberangkatan->segmentKeberangkatan->count() - 2 }}x</p>
+                                <p class="text-sm text-garuda-grey">Transit
+                                    {{ $keberangkatan->segmentKeberangkatan->count() - 2 }} x
+                                </p>
                             </div>
                             <p class="min-w-[120px] font-semibold text-garuda-green text-center">
                                 {{ 'Rp. '. number_format($keberangkatan->classKeberangkatan->first()->harga, 0, ',', '.') }}
@@ -215,7 +220,10 @@
                             <div class="flex items-center gap-[10px]">
                                 <div>
                                     <p class="font-semibold">{{ $keberangkatan->mobil->nama_mobil }}</p>
-                                    <p class="text-sm text-garuda-grey mt-[2px]">{{ $keberangkatan->segmentKeberangkatan->first()->time->format('H:i') }} - {{ $keberangkatan->segmentKeberangkatan->last()->time->format('H:i') }}</p>
+                                    <p class="text-sm text-garuda-grey mt-[2px]">
+                                        {{ $keberangkatan->segmentKeberangkatan->first()->time->format('H:i') }} -
+                                        {{ $keberangkatan->segmentKeberangkatan->last()->time->format('H:i') }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-[2px] items-center justify-center">
@@ -258,14 +266,19 @@
                                             <p class="text-sm text-garuda-grey mt-[2px]">
                                                 Departure</p>
                                             <p class="font-semibold">
-                                                {{ $keberangkatan->segmentKeberangkatan->first()->destinasi->rute_perjalanan }} ( {{ $keberangkatan->segmentKeberangkatan->first()->destinasi->iata_code }} )
+                                                {{ $keberangkatan->segmentKeberangkatan->first()->destinasi->rute_perjalanan }}
+                                                (
+                                                    {{ $keberangkatan->segmentKeberangkatan->first()->destinasi->iata_code }}
+                                                )
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="time flex flex-col items-center w-[83px]">
                                     <div class="h-8 border border-garuda-black border-dashed"></div>
-                                    <p class="text-xs leading-[18px] text-garuda-grey">{{ number_format($keberangkatan->segmentKeberangkatan->first()->time->diffInHours($keberangkatan->segmentKeberangkatan->last()->time), 0) }} hours</p>
+                                    <p class="text-xs leading-[18px] text-garuda-grey">
+                                        {{ number_format($keberangkatan->segmentKeberangkatan->first()->time->diffInHours($keberangkatan->segmentKeberangkatan->last()->time), 0) }} hours
+                                    </p>
                                     <div class="h-8 border border-garuda-black border-dashed"></div>
                                 </div>
                                 <div class="arrival flex items-center gap-5">
@@ -282,7 +295,10 @@
                                             <p class="text-sm text-garuda-grey mt-[2px]">
                                                 Arrival</p>
                                             <p class="font-semibold">
-                                                {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->rute_perjalanan }} ( {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->iata_code }} )
+                                                {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->rute_perjalanan }}
+                                                (
+                                                    {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->iata_code }}
+                                                )
                                             </p>
                                         </div>
                                     </div>
