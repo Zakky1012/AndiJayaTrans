@@ -3,7 +3,6 @@
 @section('content')
 <main class="relative flex flex-col w-full max-w-[1280px] px-[75px] mx-auto mt-[50px] mb-[62px]">
     <h2 class="font-bold text-xl leading-[30px]">Keberangkatan yang tersedia</h2>
-            @foreach ($keberangkatans as $keberangkatan)
                 <h1 class="font-extrabold text-[50px] leading-[75px]">Cari Keberangkatan</h1>
                 @if (request()->departure || request()->arrival || request()->date || request()->quantity)
                 <div class="flex w-fit rounded-[20px] p-5 gap-[30px] bg-white mt-5">
@@ -320,7 +319,7 @@
                         @endforeach
                     </div>
                 </div>
-            @endforeach
+
 </main>
 
 @endsection
