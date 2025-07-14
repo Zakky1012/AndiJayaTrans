@@ -15,22 +15,22 @@ return new class extends Migration
             $table->id();
             // Disarankan menggunakan string untuk 'kode' jika bisa berisi huruf atau leading zeros
             // dan tambahkan unique() jika kode transaksi harus unik.
-            $table->string('kode')->unique(); 
-            
+            $table->string('kode')->unique();
+
             // Perbaikan untuk foreign key: Gunakan references() dan on() secara eksplisit
             $table->foreignId('keberangkatan_id')->references('id')->on('keberangkatans')->cascadeOnDelete();
-            
+
             // Perbaikan untuk foreign key: Gunakan references() dan on() secara eksplisit
             $table->foreignId('kelas_keberangkatan_id')->references('id')->on('class_keberangkatans')->cascadeOnDelete();
-            
+
             $table->string('nama');
             $table->string('email');
             $table->string('nomor_hp');
             $table->integer('nomor_pessenger');
-            
+
             // Perbaikan untuk foreign key: Gunakan references() dan on() secara eksplisit
             $table->foreignId('kode_promo_id')->nullable()->references('id')->on('promo_codes')->cascadeOnDelete();
-            
+
             $table->enum('status_payment', ['pending', 'dibayar', 'gagal'])->default('pending');
             $table->integer('sub_total')->nullable();
             $table->integer('grand_total')->nullable();

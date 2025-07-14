@@ -75,7 +75,7 @@
                     </label>
                 </div>
                 <hr class="border-[#E8EFF7]">
-                <div id="Airlines" class="flex flex-col gap-4">
+                <div id="Mobils" class="flex flex-col gap-4">
                     <p class="font-semibold">Mobil</p>
                     @foreach($mobils as $mobil)
                       <label class="flex items-center gap-[10px]">
@@ -154,8 +154,7 @@
                                     </p>
                                 </div>
                                 <p class="text-sm text-garuda-grey">Transit
-                                    {{ $keberangkatan->segmentKeberangkatan->count() - 2 }} x
-                                </p>
+                                    {{ $keberangkatan->segmentKeberangkatan->count() - 2 }} x </p>
                             </div>
                             <p class="min-w-[120px] font-semibold text-garuda-green text-center">
                                 {{ 'Rp. '. number_format($keberangkatan->classKeberangkatan->first()->harga, 0, ',', '.') }}
@@ -222,8 +221,7 @@
                                     <p class="font-semibold">{{ $keberangkatan->mobil->nama_mobil }}</p>
                                     <p class="text-sm text-garuda-grey mt-[2px]">
                                         {{ $keberangkatan->segmentKeberangkatan->first()->time->format('H:i') }} -
-                                        {{ $keberangkatan->segmentKeberangkatan->last()->time->format('H:i') }}
-                                    </p>
+                                        {{ $keberangkatan->segmentKeberangkatan->last()->time->format('H:i') }}</p>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-[2px] items-center justify-center">
@@ -295,10 +293,7 @@
                                             <p class="text-sm text-garuda-grey mt-[2px]">
                                                 Arrival</p>
                                             <p class="font-semibold">
-                                                {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->rute_perjalanan }}
-                                                (
-                                                    {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->iata_code }}
-                                                )
+                                                {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->rute_perjalanan }} ( {{ $keberangkatan->segmentKeberangkatan->last()->destinasi->iata_code }} )
                                             </p>
                                         </div>
                                     </div>

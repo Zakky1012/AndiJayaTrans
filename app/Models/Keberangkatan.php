@@ -61,7 +61,7 @@ class Keberangkatan extends Model
         $classes = $this->classKeberangkatan->filter(function($class) {
             // PERBAIKAN: Menggunakan $class->total_kursi, bukan $class->total_seats
             return $class->total_kursi > 0;
-        })->values(); 
+        })->values();
 
         if ($classes->isEmpty()) {
             print("Tidak ada ClassKeberangkatan yang valid (total_kursi > 0) yang terkait dengan Keberangkatan ID: {$this->id}. Tidak ada kursi yang akan dibuat.");
@@ -81,7 +81,7 @@ class Keberangkatan extends Model
         // Ini memastikan kita memulai dari awal setiap kali generateSeats dipanggil
         // dan menghindari masalah penonaktifan kursi yang kompleks.
         $this->kursiKeberangkatan()->delete();
-        
+
         $currentClassIndex = 0;
         $seatsAssignedToCurrentClass = 0;
         $globalSeatCounter = 0; // Menghitung total kursi yang sudah dibuat
@@ -144,7 +144,7 @@ class Keberangkatan extends Model
     private function generateSeatCode($row, $column)
     {
         // Mengkonversi angka kolom menjadi huruf (1=A, 2=B, dst.)
-        $columnLetter = chr(64 + $column); 
+        $columnLetter = chr(64 + $column);
         // Menggabungkan nomor baris dan huruf kolom
         return $row . $columnLetter; // Contoh: 1A, 1B, 2A, 2B, 2C, 3A, 3B
     }

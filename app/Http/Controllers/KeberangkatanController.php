@@ -18,11 +18,12 @@ class KeberangkatanController extends Controller
                                 MobilRepositoryInterface $mobilRepository,
                                 KeberangkatanRepositoryInterface $keberangkatanRepository) {
         $this->destinasiRepository      = $destinasiRepository;
-        $this->mobilRepository          = $mobilRepository;
         $this->keberangkatanRepository  = $keberangkatanRepository;
+        $this->mobilRepository          = $mobilRepository;
     }
 
     public function index(Request $request) {
+
         $departure = $this->destinasiRepository->getDestinasiByIataCode($request->departure);
         $arrival   = $this->destinasiRepository->getDestinasiByIataCode($request->arrival);
 
