@@ -243,7 +243,7 @@
                                     <p class="min-w-[120px] font-semibold text-garuda-green text-center">
                                         {{ 'Rp. '. number_format($keberangkatan->classKeberangkatan->first()->harga, 0, ',', '.') }}
                                     </p>
-                                    <a href="choose-tiers.html"
+                                    <a href="{{ route('keberangkatan.show', $keberangkatan->nomor_keberangkatan) }}"
                                         class="rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                                         <span class="font-semibold text-white">Choose</span>
                                     </a>
