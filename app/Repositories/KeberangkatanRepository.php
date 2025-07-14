@@ -6,34 +6,49 @@ use App\Models\Keberangkatan;
 use App\Interfaces\KeberangkatanRepositoryInterface;
 
 class KeberangkatanRepository implements KeberangkatanRepositoryInterface {
-  public function getAllKeberangkatans($filter = null) {
-    $keberangkatan = Keberangkatan::query();
+public function getAllKeberangkatans($filter = null)
+{
+    $query = Keberangkatan::with([
+        'segmentKeberangkatan.destinasi',
+        'classKeberangkatan.fasilitas',
+        'mobil',
+    ]);
 
-    if(!empty($filter['departure'])) {
-      $keberangkatan->whereHas('segmentKeberangkatan', function ($query) use ($filter) {
-        $query->where('keberangkatan_id', $filter['departure'])
-          ->where('sequence', 1);
-      });
+    // Filter: Departure
+    if (!empty($filter['departure'])) {
+        $query->whereHas('segmentKeberangkatan', function ($q) use ($filter) {
+            $q->where('destinasi_id', $filter['departure']);
+        });
     }
 
-    if(!empty($filter['arrival'])) {
-      $keberangkatan->whereHas('segmentKeberangkatan', function ($query) use ($filter) {
-        $query->where('keberangkatan_id', $filter['arrival'])
-          ->orderBy('sequence', 'desc')
-          ->limit(1);
-      });
+    // Filter: Arrival
+    if (!empty($filter['arrival'])) {
+        $query->whereHas('segmentKeberangkatan', function ($q) use ($filter) {
+            $q->where('destinasi_id', $filter['arrival']);
+        });
     }
 
-    if(!empty($filter['date'])) {
-      $keberangkatan->whereHas('segmentKeberangkatan', function ($query) use ($filter) {
-        $query->whereDate('time', $filter['date']);
-      });
+    // Filter: Date
+    if (!empty($filter['date'])) {
+        $query->whereHas('segmentKeberangkatan', function ($q) use ($filter) {
+            $q->whereDate('time', $filter['date']);
+        });
     }
 
-    return $keberangkatan->get();
-  }
+    // ✅ Filter: Quantity (INI YANG PENTING)
+    if (!empty($filter['quantity'])) {
+        $query->whereHas('classKeberangkatan', function ($q) use ($filter) {
+            $q->where('total_kursi', '>=', (int) $filter['quantity']);
+        });
+    }
 
-  public function getKeberangkatanByNomorKeberangkatan($nomorKeberangkatan) {
+    return $query->get();
+    dd($query->toSql());
+}
+
+
+public function getKeberangkatanByNomorKeberangkatan($nomorKeberangkatan) {
     return Keberangkatan::where('nomor_keberangkatan', $nomorKeberangkatan)->first();
   }
+
 }

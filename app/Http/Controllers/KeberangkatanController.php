@@ -6,6 +6,7 @@ use App\Interfaces\DestinasiRepositoryInterface;
 use App\Interfaces\KeberangkatanRepositoryInterface;
 use App\Interfaces\MobilRepositoryInterface;
 use App\Models\Keberangkatan;
+use App\Models\SegmentKeberangkatan;
 use Illuminate\Http\Request;
 
 class KeberangkatanController extends Controller
@@ -22,19 +23,38 @@ class KeberangkatanController extends Controller
         $this->mobilRepository          = $mobilRepository;
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
+        $segments = SegmentKeberangkatan::orderBy('keberangkatan_id')->get(['id', 'keberangkatan_id', 'destinasi_id', 'sequence', 'time']);
 
-        $departure = $this->destinasiRepository->getDestinasiByIataCode($request->departure);
-        $arrival   = $this->destinasiRepository->getDestinasiByIataCode($request->arrival);
+        // Ambil data destinasi berdasarkan kode IATA jika tersedia
+        $departure = $request->filled('departure')
+            ? $this->destinasiRepository->getDestinasiByIataCode($request->departure)
+            : null;
 
-        $keberangkatans = $this->keberangkatanRepository->getAllKeberangkatans([
-            'departure' => $departure->id ?? null,
-            'arrival'   => $arrival->id ?? null,
-            'date'      => $request->date ?? null,
-        ]);
+        $arrival = $request->filled('arrival')
+            ? $this->destinasiRepository->getDestinasiByIataCode($request->arrival)
+            : null;
 
-        $mobils      = $this->mobilRepository->getAllMobils();
+        // Siapkan filter hanya jika data tersedia dan valid
+        $filters = [
+            'departure' => $departure?->id,  // gunakan null-safe operator
+            'arrival'   => $arrival?->id,
+            'date'      => $request->date,
+            'quantity'  => $request->quantity,
+        ];
 
-        return view('pages.keberangkatan.index', compact('keberangkatans', 'mobils'));
+        // Ambil data berdasarkan filter (jika kosong akan mengambil semua)
+        $keberangkatans = $this->keberangkatanRepository->getAllKeberangkatans($filters);
+
+        // Ambil semua data mobil
+        $mobils = $this->mobilRepository->getAllMobils();
+
+        // Ambil data semua destinasi (untuk dropdown filter)
+        $destinasis = $this->destinasiRepository->getAllDestinasis();
+
+        // Kirim data ke view
+        return view('pages.keberangkatan.index', compact('keberangkatans', 'mobils', 'destinasis'));
     }
+
 }
