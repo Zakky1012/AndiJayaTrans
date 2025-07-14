@@ -19,11 +19,11 @@
             </ul>
             <div class="flex items-center gap-3">
                 <a href="#" class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px]">
-                    <img src="assets/images/icons/call-calling-black.svg" class="w-5 h-5 flex shrink-0" alt="icon">
+                    <img src="{{ asset('assets/images/icons/call-calling-black.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
                     <span class="font-semibold">Call Us</span>
                 </a>
                 <a href="{{ route('booking.check') }}" class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] bg-garuda-black">
-                    <img src="assets/images/icons/note-favorite-white.svg" class="w-5 h-5 flex shrink-0" alt="icon">
+                    <img src="{{ asset('assets/images/icons/note-favorite-white.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
                     <span class="font-semibold text-white">My Booking</span>
                 </a>
             </div>

@@ -57,4 +57,10 @@ class KeberangkatanController extends Controller
         return view('pages.keberangkatan.index', compact('keberangkatans', 'mobils', 'destinasis'));
     }
 
+    public function show($nomorKeberangkatan) {
+        $keberangkatan = $this->keberangkatanRepository->getKeberangkatanByNomorKeberangkatan($nomorKeberangkatan);
+
+        return view('pages.keberangkatan.show', compact('keberangkatan'));
+    }
+
 }

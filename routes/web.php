@@ -7,4 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/keberangkatans', [KeberangkatanController::class, 'index'])->name('keberangkatan.index');
-Route::get('check-booking', [BookingController::class, 'checkBooking'])->name('booking.check');
+Route::get('/keberangkatan/{nomorKeberangkatan}/choose-tiew', [KeberangkatanController::class, 'show'])->name('keberangkatan.show');
+
+Route::get('/check-booking', [BookingController::class, 'checkBooking'])->name('booking.check');
