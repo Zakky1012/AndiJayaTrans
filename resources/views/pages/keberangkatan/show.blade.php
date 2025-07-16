@@ -96,7 +96,8 @@
                     </div>
                 </div>
             </div>
-            <div id="Tiers" class="grid grid-cols-2 gap-x-[30px]">
+            <form action="{{ route('booking', $keberangkatan->nomor_keberangkatan) }}" id="Tiers" class="grid grid-cols-2 gap-x-[30px]">
+                <input type="hidden" name="keberangkatan_class_id" value="" id="class_keberangkatan_id">
                 @foreach ($keberangkatan->classKeberangkatan as $class)
                     <div id="Economy" class="flex flex-col h-fit rounded-[20px] p-5 pb-[30px] gap-5 bg-white">
                     <div class="w-[260px] h-[180px] rounded-[30px] bg-[#D9D9D9] overflow-hidden">
@@ -120,12 +121,12 @@
                             <p class="font-semibold">{{ $fasilitas->nama }}</p>
                         </div>
                     @endforeach
-                    <a href="choose-seats-economy.html" class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
+                    <button class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300" onclick="document.getElementById('class_keberangkatan_id').value = {{ $class->id }}">
                         <span class="font-semibold text-white">Choose</span>
-                    </a>
+                    </button>
                     </div>
                 @endforeach
-            </div>
+            </form>
         </div>
     </main>
 @endsection
