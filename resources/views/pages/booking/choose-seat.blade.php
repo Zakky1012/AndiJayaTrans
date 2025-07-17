@@ -165,7 +165,7 @@
             </div>
             <div id="Plane" class="relative flex w-[558px] shrink-0 mt-[30px] mx-auto">
                 <div class="relative flex flex-col justify-end">
-                    <form action="{{ route('booking.confirmSeat', $keberangkatan->nomor_keberangkatan) }}" method="post" class="relative px-[56px] pb-[60px]" id="form-seat">
+                    <form action="{{ route('confirmSeat', $keberangkatan->nomor_keberangkatan) }}" method="post" class="relative px-[56px] pb-[60px]" id="form-seat">
                         @csrf
                         <input type="hidden" name="keberangkatan_id" value="{{ $keberangkatan->id }}">
                         <p class="text-center font-bold text-xl leading-[30px]">{{ \Str::ucfirst($tier->tipe_kelas) }} Class</p>
@@ -185,7 +185,7 @@
                             </div>
                         </div>
                         <div id="Seats-Options"
-                            class="flex flex-wrap w-full gap-y-8 @if ($tier->tipe_kelas == 'premium') gap-x-10 px-[33px] @else gap-x-[14px] @endif">
+                            class="flex flex-wrap w-full gap-y-8 @if ($tier->tipe_kelas == 'premium') gap-x-10 px-[33px] @else gap-[14px] @endif">
                             @foreach ($keberangkatan->kursiKeberangkatan->where('tipe_kelas', $tier->tipe_kelas) as $seat)
                                 <label
                                     class="group relative flex w-[55px] h-[52.25px] shrink-0 @if ($tier->tipe_kelas == 'premium') [&:nth-child(4n+2)]:mr-10 @else [&:nth-child(6n+3)]:mr-[46px] @endif">
