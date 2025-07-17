@@ -12,5 +12,6 @@ Route::get('/keberangkatan/{nomorKeberangkatan}/choose-tier', [KeberangkatanCont
 Route::get('/keberangkatan/booking/{nomorKeberangkatan}', [BookingController::class, 'booking'])->name('booking');
 
 Route::get('/keberangkatan/booking/{nomorKeberangkatan}/choose-seat', [BookingController::class, 'chooseSeat'])->name('booking.chooseSeat');
+Route::post('/keberangkatan/booking/{nomorKeberangkatan}/confirm-seat', [BookingController::class, 'confirmSeat'])->name('booking.confirmSeat');
 
 Route::get('/check-booking', [BookingController::class, 'checkBooking'])->name('booking.check');
