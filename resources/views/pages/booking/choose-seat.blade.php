@@ -188,7 +188,9 @@
                             class="flex flex-wrap w-full gap-y-8 @if ($tier->tipe_kelas == 'premium') gap-x-10 px-[33px] @else gap-[14px] @endif">
                             @foreach ($keberangkatan->kursiKeberangkatan->where('tipe_kelas', $tier->tipe_kelas) as $seat)
                                 <label
-                                    class="group relative flex w-[55px] h-[52.25px] shrink-0 @if ($tier->tipe_kelas == 'premium') [&:nth-child(4n+2)]:mr-10 @else [&:nth-child(6n+3)]:mr-[46px] @endif">
+                                    class="group relative flex w-[55px] h-[52.25px] shrink-0 @if ($tier->tipe_kelas == 'premium') [&:nth-child(4n+2)]:mr-10 @else [&:nth-child(6n+3)]:mr-[46px] @endif"
+                                    data-seat="{{ $seat->name }}" {{-- TAMBAHKAN INI --}}
+                                    data-seat-id="{{ $seat->id }}" {{-- TAMBAHKAN INI --}}>
                                     <input type="checkbox" name="seat"
                                         class="seat-checkbox absolute top-1/2 left-1/2 opacity-0"
                                         @if (!$seat->is_available) disabled @endif
