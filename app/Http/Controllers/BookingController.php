@@ -35,8 +35,18 @@ class BookingController extends Controller
     }
 
     public function confirmSeat(Request $request, $nomorKeberangkatan) {
-        dd($request->all());
+
         $this->transaksiRepository->saveTransaksiDataToSession($request->all());
+
+        return redirect()->route('booking.passengerDetails', ['nomorKeberangkatan' => $nomorKeberangkatan]);
+    }
+
+    public function passengerDetails(Request $request, $nomorKeberangkatan){
+        $transaction    = $this->transaksiRepository->getTransaksiDataFromSession();
+        $keberangkatan  = $this->keberangkatanRepository->getKeberangkatanByNomorKeberangkatan($nomorKeberangkatan);
+        $tier           = $keberangkatan->classKeberangkatan->find($transaction['keberangkatan_class_id']);
+
+        return view('pages.booking.passenger-details', compact('transaction','keberangkatan','tier'));
     }
 
     public function checkBooking() {
