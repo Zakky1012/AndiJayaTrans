@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePassangerDetailRequest;
 use App\Interfaces\KeberangkatanRepositoryInterface;
 use App\Interfaces\TransaksiRepositoryInterface;
 use Illuminate\Http\Request;
@@ -42,6 +43,19 @@ class BookingController extends Controller
     }
 
     public function passengerDetails(Request $request, $nomorKeberangkatan){
+        $transaction    = $this->transaksiRepository->getTransaksiDataFromSession();
+        $keberangkatan  = $this->keberangkatanRepository->getKeberangkatanByNomorKeberangkatan($nomorKeberangkatan);
+        $tier           = $keberangkatan->classKeberangkatan->find($transaction['keberangkatan_class_id']);
+
+        return view('pages.booking.passenger-details', compact('transaction','keberangkatan','tier'));
+    }
+
+    public function savePassengerDetails(StorePassangerDetailRequest $request, $nomorKeberangkatan){
+        dd($request->all());
+        $this->transaksiRepository->saveTransaksiDataToSession($request->all());
+    }
+
+    public function checkout($nomorKeberangkatan) {
         $transaction    = $this->transaksiRepository->getTransaksiDataFromSession();
         $keberangkatan  = $this->keberangkatanRepository->getKeberangkatanByNomorKeberangkatan($nomorKeberangkatan);
         $tier           = $keberangkatan->classKeberangkatan->find($transaction['keberangkatan_class_id']);
