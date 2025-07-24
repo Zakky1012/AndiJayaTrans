@@ -97,6 +97,80 @@
                     </div>
                 </div>
             </div>
+            <div id="Transaction-Info" class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
+                <label class="flex items-center justify-between p-5">
+                    <h2 class="font-bold text-xl leading-[30px]">Transaction Details</h2>
+                    <img src="{{ asset('assets/images/icons/arrow-up-circle-black.svg') }}" class="w-9 h-8 group-has-[:checked]:rotate-180 transition-all duration-300" alt="icon">
+                    <input type="checkbox" class="hidden">
+                </label>
+                <div class="accordion-content p-5 pt-0 flex flex-col gap-5">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-sm text-garuda-grey">Quantity</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ count($transaction['selected_seats']) }} people</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-garuda-grey">Tiers</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">{{ \Str::ucfirst($tier->tipe_kelas) }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-garuda-grey">Seats</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                {{ implode(', ', $keberangkatan->kursiKeberangkatan->whereIn('id', $transaction['selected_seats'])->pluck('name')->toArray() )}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="text-sm text-garuda-grey">Price</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                {{ 'Rp. '. number_format($tier->harga, 0, ',', '.') }}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-garuda-grey">Govt. Tax</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">11%</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-garuda-grey">Sub Total</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                {{ 'Rp. '. number_format($tier->harga * count($transaction['selected_seats']), 0, ',', '.')}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm text-garuda-grey">Diskon</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px] text-garuda-green" id="discount"> Rp 0
+
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-garuda-grey">Promo Code</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]" id="promo-code">
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-sm text-garuda-grey">Total Tax</p>
+                            <p class="font-semibold text-lg leading-[27px] mt-[2px]">
+                                {{ 'Rp. '. number_format($tier->harga * count($transaction['selected_seats']) * 0.11, 0, ',', '.')}}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-garuda-grey">Grand Total</p>
+                            <p class="font-bold text-2xl leading-9 text-garuda-blue mt-[2px]" id="grand-total">
+                                {{ 'Rp. '. number_format($tier->harga * count($transaction['selected_seats']) * 1.11, 0, ',', '.')}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
+                <span class="font-semibold text-white">Continue Booking</span>
+            </button>
             </div>
             <form action="success-booking.html" id="Right-Content" class="flex flex-col gap-[30px] w-[490px] shrink-0">
                 <div id="Customer-Info"
@@ -251,38 +325,7 @@
                     </div>
                 </div>
                 @endforeach
-                <div id="Promo" class="flex flex-col rounded-[20px] p-5 gap-5 bg-white overflow-hidden">
-                    <h2 class="font-bold text-xl leading-[30px]">Apply Promo</h2>
-                    <label class="flex flex-col gap-[10px]">
-                        <p class="font-semibold">Your Promo Code</p>
-                        <div class="flex items-center flex-nowrap gap-[10px]">
-                            <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/receipt-discount-black.svg') }}" class="w-5 flex shrink-0"
-                                    alt="icon">
-                                <input type="text" name="" id=""
-                                    class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
-                                    placeholder="Input promo code">
-                                <img src="{{ asset('assets/images/icons/verify.svg') }}" class="w-5 flex shrink-0" alt="icon">
-                            </div>
-                            <span class="font-semibold text-garuda-green text-nowrap">Kode promo tersedia</span>
-                        </div>
-                    </label>
-                    <label class="flex flex-col gap-[10px]">
-                        <p class="font-semibold">Your Promo Code</p>
-                        <div class="flex items-center flex-nowrap gap-[10px]">
-                            <div
-                                class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
-                                <img src="{{ asset('assets/images/icons/receipt-discount-black.svg') }}" class="w-5 flex shrink-0"
-                                    alt="icon">
-                                <input type="text" name="" id=""
-                                    class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
-                                    placeholder="Input promo code">
-                            </div>
-                            <span class="font-semibold text-garuda-red text-nowrap">Kode promo tidak tersedia</span>
-                        </div>
-                    </label>
-                </div>
+                @livewire('check-promo-code')
                 <div id="Payment-Method" class="flex flex-col rounded-[20px] p-5 gap-5 bg-white overflow-hidden">
                     <h2 class="font-bold text-xl leading-[30px]">Payment Method</h2>
                     <div class="flex flex-col gap-[10px]">
@@ -296,14 +339,14 @@
                                 <span class="font-semibold group-has-[:checked]:text-white">Midtrans Gateway</span>
                                 <input type="radio" name="payment-method" class="absolute opacity-0 left-1/2" required>
                             </label>
-                            <label
+                            {{-- <label
                                 class="group relative flex items-center w-full rounded-full py-3 px-5 bg-garuda-bg-dark-grey gap-[10px] has-[:checked]:bg-garuda-orange transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                     class="w-5 flex shrink-0 group-has-[:checked]:invert transition-all duration-300"
                                     alt="icon">
                                 <span class="font-semibold group-has-[:checked]:text-white">Transfer to Bank</span>
-                                <input type="radio" name="payment-method" class="absolute opacity-0 left-1/2" required>
-                            </label>
+                                <input type="radio" name="payment-method" class="absolute opacity-0 left-1/2" disabled>
+                            </label> --}}
                         </div>
                     </div>
                 </div>
@@ -314,4 +357,37 @@
             </form>
         </div>
     </main>
+@endsection
+
+@section('scripts')
+    <script>
+        window.addEventListener('promoCodeUpdated', event => {
+            // ambil harga produk dan jumlah seat yang dipilih
+            const price     = parseFloat('{{ $tier->harga }}');
+            const quantity  = parseInt('{{ count($transaction['selected_seats']) }}');
+            const totalWithoutDiscount = price * quantity;
+
+            // variable menyimpan total baru dan totla diskon
+            let newTotal;
+            let totalPromo = 0;
+
+            // Cek tipe diskon dan hitung total serta diskon yang ditetapkan
+            const promoCode     = event.detail[0].promo_code;
+            const discountType  = event.detail[0].tipe_diskon;
+            const discountValue = event.detail[0].diskon;
+
+            if (discountType == 'percentage') {
+                totalPromo = totalWithoutDiscount * (discountValue / 100);
+            } else {
+                totalPromo = discountValue;
+            }
+
+            newTotal = totalWithoutDiscount - totalPromo;
+
+            // tampilan hasil perhitungan
+            document.getElementById('promo-code').innerHTML = promoCode;
+            document.getElementById('grand-total').innerHTML = 'Rp ' + newTotal.toLocaleString('id-ID');
+            document.getElementById('discount').innerHTML = '- Rp ' + totalPromo.toLocaleString('id-ID');
+        })
+    </script>
 @endsection
