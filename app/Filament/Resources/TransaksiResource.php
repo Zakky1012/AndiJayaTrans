@@ -29,7 +29,7 @@ class TransaksiResource extends Resource
                         Forms\Components\TextInput::make('kode'),
                         Forms\Components\Select::make('keberangkatan_id')
                             ->relationship('keberangkatan', 'nomor_keberangkatan'),
-                        Forms\Components\Select::make('kelas_keberangkatan_id')
+                        Forms\Components\Select::make('keberangkatan_class_id')
                             ->relationship('classKeberangkatan', 'tipe_kelas'),
                     ]),
                 Forms\Components\Section::make('Informasi penumpang')

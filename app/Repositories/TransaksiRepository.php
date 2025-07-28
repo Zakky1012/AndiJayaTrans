@@ -57,18 +57,18 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
     return "ANDIJAYA" . rand(1000, 9999);
   }
 
-  private function countPessengers($pessengers){
-    return count($pessengers);
+  private function countPessengers($passengers){
+    return count($passengers);
   }
 
   private function calculateSubTotal($keberangkatanClassId, $nomorPessengers){
     $harga = ClassKeberangkatan::findOrFail($keberangkatanClassId)->harga;
-    return $harga = $nomorPessengers;
+    return $harga * $nomorPessengers;
   }
 
   private function applyPromoCode($data) {
     $promo = PromoCode::where('kode', $data['promo_code'])
-      ->where('valid_until', '>=', now())
+      ->where('valid', '>=', now())
       ->where('is_used', false)
       ->first();
 
@@ -91,7 +91,7 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
 
   private function addPPN($grandTotal){
     $ppn = $grandTotal * 0.11;
-    return $grandTotal * $ppn;
+    return $grandTotal + $ppn;
   }
 
   private function createTransaksi($data) {
@@ -101,7 +101,6 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
   private function savePessengers($passengers, $transaksi) {
     foreach ($passengers as $passenger) {
       $passenger['transaksi_id'] = $transaksi;
-
       TransaksiPassenger::create($passenger);
     }
   }

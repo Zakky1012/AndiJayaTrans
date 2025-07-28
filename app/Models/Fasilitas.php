@@ -17,6 +17,6 @@ class Fasilitas extends Model
     ];
 
     public function classes(){
-        return $this->belongsToMany(Fasilitas::class, 'keberangkatan_class_fasilitas', 'kelas_keberangkatan_id', 'fasilitas_id');
+        return $this->belongsToMany(Fasilitas::class, 'keberangkatan_class_fasilitas', 'keberangkatan_class_id', 'fasilitas_id');
     }
 }
