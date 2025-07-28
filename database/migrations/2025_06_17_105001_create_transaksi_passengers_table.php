@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('transaksi_id')->constrained()->cascadeOnDelete();
             $table->foreignId('kursi_keberangkatan_id')->constrained()->cascadeOnDelete();
             $table->string('nama');
-            $table->date('tanggal_lahir');
-            $table->string('kewarganegaraan');
+            $table->date('date_of_birth');
+            $table->string('kewarganeraan');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -14,7 +14,7 @@ class TransaksiPassenger extends Model
         'transaksi_id',
         'kursi_keberangkatan_id',
         'nama',
-        'tanggal_lahir',
+        'date_of_birth',
         'kewarganeraan',
     ];
 

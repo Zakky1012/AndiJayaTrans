@@ -14,7 +14,7 @@ return new class extends Migration
         // panjang setelahnya
         Schema::table('transaksi_passengers', function (Blueprint $table) {
             $table->string('nama',30)->change();
-            $table->string('kewarganegaraan',30)->change();
+            $table->string('kewarganeraan',30)->change();
         });
     }
 

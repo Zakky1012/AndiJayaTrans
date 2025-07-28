@@ -172,7 +172,8 @@
                 <span class="font-semibold text-white">Continue Booking</span>
             </button> --}}
             </div>
-            <form action="success-booking.html" id="Right-Content" class="flex flex-col gap-[30px] w-[490px] shrink-0">
+            <form action="{{ route('booking.payment', $keberangkatan->nomor_keberangkatan) }}" method="POST" id="Right-Content" class="flex flex-col gap-[30px] w-[490px] shrink-0">
+                @csrf
                 <div id="Customer-Info"
                     class="accordion group flex flex-col h-fit rounded-[20px] bg-white overflow-hidden has-[:checked]:!h-[75px] transition-all duration-300">
                     <label class="flex items-center justify-between p-5">
@@ -187,7 +188,7 @@
                             <div
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/profile-black.svg') }}" class="w-5 flex shrink-0" alt="icon">
-                                <input type="text" name="" id="" value="{{ $transaction['nama'] }}"
+                                <input type="text" id="" value="{{ $transaction['nama'] }}"
                                     readonly
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your complete name">
@@ -198,7 +199,7 @@
                             <div
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/sms-black.png') }}" class="w-5 flex shrink-0" alt="icon">
-                                <input type="email" name="" id="" value="{{ $transaction['email'] }}"
+                                <input type="email" id="" value="{{ $transaction['email'] }}"
                                     readonly
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your valid email">
@@ -209,7 +210,7 @@
                             <div
                                 class="flex items-center rounded-full border border-garuda-black py-3 px-5 gap-[10px] focus-within:border-[#0068FF] transition-all duration-300">
                                 <img src="{{ asset('assets/images/icons/call-black.svg') }}" class="w-5 flex shrink-0" alt="icon">
-                                <input type="tel" name="" id="" value="{{ $transaction['nomor'] }}"
+                                <input type="tel" id="" value="{{ $transaction['nomor'] }}"
                                     readonly
                                     class="appearance-none outline-none w-full font-semibold placeholder:font-normal"
                                     placeholder="Write your active number">
@@ -246,7 +247,7 @@
                                     @error('passengers.' . $loop->index . '.date_of_birth') border-red-500 @enderror>
                                         <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                             class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0" alt="icon">
-                                    <select id="day-select-{{ $loop->index }}" name=""
+                                    <select id="day-select-{{ $loop->index }}"
                                         class="date-select day-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
                                         data-index="{{ $loop->index }}"
                                         onchange="updateDateOfBirth({{ $loop->index }})">
@@ -263,7 +264,7 @@
                                 @error('passengers.' . $loop->index . '.date_of_birth') border-red-500 @enderror>
                                     <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0" alt="icon">
-                                    <select id="month-select-{{ $loop->index }}" name=""
+                                    <select id="month-select-{{ $loop->index }}"
                                         class="date-select month-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
                                         data-index="{{ $loop->index }}"
                                         onchange="updateDateOfBirth({{ $loop->index }})">
@@ -280,7 +281,7 @@
                                 @error('passengers.' . $loop->index . '.date_of_birth') border-red-500 @enderror>
                                     <img src="{{ asset('assets/images/icons/note-add-black.svg') }}"
                                         class="absolute transform -translate-y-1/2 top-1/2 left-5 w-5 shrink-0" alt="icon">
-                                    <select id="year-select-{{ $loop->index }}" name=""
+                                    <select id="year-select-{{ $loop->index }}"
                                         class="date-select year-select appearance-none w-full outline-none pl-[50px] py-3 px-5 font-semibold indeterminate:!font-normal"
                                         data-index="{{ $loop->index }}"
                                         onchange="updateDateOfBirth({{ $loop->index }})">

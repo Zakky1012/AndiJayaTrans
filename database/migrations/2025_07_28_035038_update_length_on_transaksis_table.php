@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('kode', 50)->change();
             $table->string('nama', 25)->change();
             $table->string('email', 50)->change();
-            $table->string('nomor_hp', 15)->change();
+            $table->string('nomor', 15)->change();
         });
     }
 
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('kode', 255)->change();
             $table->string('nama', 255)->change();
             $table->string('email', 255)->change();
-            $table->string('nomor_hp', 255)->change();
+            $table->string('nomor', 255)->change();
         });
     }
 };

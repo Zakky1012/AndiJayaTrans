@@ -13,10 +13,10 @@ class Transaksi extends Model
     protected $fillable = [
         'kode',
         'keberangkatan_id',
-        'kelas_keberangkatan_id',
+        'keberangkatan_class_id',
         'nama',
         'email',
-        'nomor_hp',
+        'nomor',
         'nomor_pessenger',
         'kode_promo_id',
         'status_payment',

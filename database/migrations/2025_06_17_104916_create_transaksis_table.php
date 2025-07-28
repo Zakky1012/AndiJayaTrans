@@ -21,11 +21,11 @@ return new class extends Migration
             $table->foreignId('keberangkatan_id')->references('id')->on('keberangkatans')->cascadeOnDelete();
 
             // Perbaikan untuk foreign key: Gunakan references() dan on() secara eksplisit
-            $table->foreignId('kelas_keberangkatan_id')->references('id')->on('class_keberangkatans')->cascadeOnDelete();
+            $table->foreignId('keberangkatan_class_id')->references('id')->on('class_keberangkatans')->cascadeOnDelete();
 
             $table->string('nama');
             $table->string('email');
-            $table->string('nomor_hp');
+            $table->string('nomor');
             $table->integer('nomor_pessenger');
 
             // Perbaikan untuk foreign key: Gunakan references() dan on() secara eksplisit

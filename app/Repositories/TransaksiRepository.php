@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
@@ -30,10 +30,10 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
   public function saveTransaksi($data)
   {
     $data['kode'] = $this->generateKodeTransaksi();
-    $data['nomor_pessenger'] = $this->countPessengers($data['pessengers']);
+    $data['nomor_pessenger'] = $this->countPessengers($data['passengers']);
 
     // hitung subtotal dan grand total awal
-    $data['sub_total'] = $this->calculateSubTotal($data['kelas_keberangkatan_id'], $data['nomor_pessenger']);
+    $data['sub_total'] = $this->calculateSubTotal($data['keberangkatan_class_id'], $data['nomor_pessenger']);
     $data['grand_total'] = $data['sub_total'];
 
     // terapkan promo jika ada
@@ -46,7 +46,7 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
 
     // simpan transaksi dan penumpang
     $transaksi = $this->createTransaksi($data);
-    $this->savePessengers($data['pessengers'], $transaksi->id);
+    $this->savePessengers($data['passengers'], $transaksi->id);
 
     session()->forget('transaksi');
 
@@ -54,7 +54,7 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
   }
 
   private function generateKodeTransaksi(){
-    return "BWAGARUDA" . rand(1000, 9999);
+    return "ANDIJAYA" . rand(1000, 9999);
   }
 
   private function countPessengers($pessengers){
@@ -98,10 +98,11 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
     return Transaksi::create($data);
   }
 
-  private function savePessengers($pessengers, $transaksi) {
-    foreach ($pessengers as $pessenger) {
-      $pessenger['transaksi_id'] = $transaksi;
-      TransaksiPassenger::create($pessenger);
+  private function savePessengers($passengers, $transaksi) {
+    foreach ($passengers as $passenger) {
+      $passenger['transaksi_id'] = $transaksi;
+
+      TransaksiPassenger::create($passenger);
     }
   }
 
@@ -112,6 +113,6 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
 
   public function getTransaksiByCodeEmailPhone($code, $email, $phone)
   {
-    return Transaksi::where('kode', $code)->where('email', $email)->where('nomor_hp', $phone)->first();
+    return Transaksi::where('kode', $code)->where('email', $email)->where('nomor', $phone)->first();
   }
 }

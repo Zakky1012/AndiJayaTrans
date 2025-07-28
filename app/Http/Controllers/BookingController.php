@@ -64,6 +64,29 @@ class BookingController extends Controller
         return view('pages.booking.checkout', compact('transaction','keberangkatan','tier'));
     }
 
+    public function payment(Request $request) {
+        $this->transaksiRepository->saveTransaksiDataToSession($request->all());
+
+        $transaction = $this->transaksiRepository->saveTransaksi($this->transaksiRepository->getTransaksiDataFromSession());
+
+        // server key
+        \Midtrans\Config::$serverKey    = config('midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+        \Midtrans\Config::$isSanitized  = config('midtrans.isSanitized');
+        \Midtrans\Config::$is3ds        = config('midtrans.is3ds');
+
+        $params = [
+            'transaction_details' => [
+                'order_id'      => $transaction->kode,
+                'gross_amount'  => $transaction->grandTotal,
+            ]
+        ];
+
+        $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+
+        return redirect($paymentUrl);
+    }
+
     public function checkBooking() {
         return view('pages.booking.check-booking');
     }
