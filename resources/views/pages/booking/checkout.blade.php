@@ -168,9 +168,9 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
+            {{-- <button type="submit" class="w-full rounded-full py-3 px-5 text-center bg-garuda-blue hover:shadow-[0px_14px_30px_0px_#0068FF66] transition-all duration-300">
                 <span class="font-semibold text-white">Continue Booking</span>
-            </button>
+            </button> --}}
             </div>
             <form action="success-booking.html" id="Right-Content" class="flex flex-col gap-[30px] w-[490px] shrink-0">
                 <div id="Customer-Info"
