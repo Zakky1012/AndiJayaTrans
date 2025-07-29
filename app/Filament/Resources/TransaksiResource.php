@@ -37,24 +37,26 @@ class TransaksiResource extends Resource
                        Forms\Components\TextInput::make('nomor_pessenger'),
                        Forms\Components\TextInput::make('nama'),
                        Forms\Components\TextInput::make('email'),
-                       Forms\Components\TextInput::make('nomor_hp'),
+                       Forms\Components\TextInput::make('nomor'),
                        Forms\Components\Section::make('Daftar Penumpang')
                             ->schema([
-                                Forms\Components\Repeater::make('pessenger')
+                                Forms\Components\Repeater::make('Passenger')
                                 ->relationship('transaksiPessenger')
                                 ->schema([
-                                    Forms\Components\TextInput::make('kursi.name'),
-                                    Forms\Components\TextInput::make('name'),
-                                    Forms\Components\TextInput::make('tanggal_lahir'),
-                                    Forms\Components\TextInput::make('kewarganegaraan'),
+                                    Forms\Components\Select::make('kursi_keberangkatan_id')
+                                        ->label('Seat Name')
+                                        ->relationship('kursi', 'name')
+                                        ->required(),
+                                    Forms\Components\TextInput::make('nama'),
+                                    Forms\Components\TextInput::make('date_of_birth'),
+                                    Forms\Components\TextInput::make('kewarganeraan'),
                                 ])
                             ])
                     ]),
                 Forms\Components\Section::make('Pembayaran')
                     ->schema([
-                        Forms\Components\TextInput::make('promoCode.kode'),
-                        Forms\Components\TextInput::make('promoCode.tipe_diskon'),
-                        Forms\Components\TextInput::make('promoCode.diskon'),
+                        Forms\Components\Select::make('kode_promo_id')
+                            ->relationship('promoCode','kode'),
                         Forms\Components\TextInput::make('status_payment'),
                         Forms\Components\TextInput::make('sub_total'),
                         Forms\Components\TextInput::make('grand_total'),
@@ -71,7 +73,7 @@ class TransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('nomor_pessenger'),
                 Tables\Columns\TextColumn::make('nama'),
                 Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('nomor_hp'),
+                Tables\Columns\TextColumn::make('nomor'),
                 Tables\Columns\TextColumn::make('nomor_pessenger'),
                 Tables\Columns\TextColumn::make('promo_code.kode'),
                 Tables\Columns\TextColumn::make('status_payment'),

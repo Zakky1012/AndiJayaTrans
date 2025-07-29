@@ -77,7 +77,9 @@ class BookingController extends Controller
     public function payment(Request $request) {
         $this->transaksiRepository->getTransaksiDataFromSession($request->all());
 
-        $transaction = $this->transaksiRepository->saveTransaksi($this->transaksiRepository->getTransaksiDataFromSession());
+        $transaction = $this->transaksiRepository->saveTransaksi (
+            $this->transaksiRepository->getTransaksiDataFromSession()
+        );
 
         \Midtrans\Config::$serverKey     = config('midtrans.serverKey');
         \Midtrans\Config::$isProduction  = config('midtrans.isProduction');

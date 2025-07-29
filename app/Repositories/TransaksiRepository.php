@@ -27,8 +27,12 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
     session()->put('transaksi', $transaksi);
   }
 
-  public function saveTransaksi($data)
-  {
+  public function saveTransaksi($data) {
+
+    if (!isset($data['passengers']) || !is_array($data['passengers'])) {
+        throw new \Exception("Data penumpang tidak ditemukan dalam sesi. Pastikan Anda mengisi form penumpang terlebih dahulu.");
+    }
+
     $data['kode'] = $this->generateKodeTransaksi();
     $data['nomor_pessenger'] = $this->countPessengers($data['passengers']);
 
@@ -37,7 +41,7 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
     $data['grand_total'] = $data['sub_total'];
 
     // terapkan promo jika ada
-    if(!empty($data['kode_promo'])) {
+    if(!empty($data['kode_promo_id'])) {
       $data = $this->applyPromoCode($data);
     }
 
