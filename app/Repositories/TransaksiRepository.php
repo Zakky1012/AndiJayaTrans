@@ -114,8 +114,8 @@ class TransaksiRepository implements TransaksiRepositoryInterface {
     return Transaksi::where('kode', $code)->first();
   }
 
-  public function getTransaksiByCodeEmailPhone($code, $email, $phone)
+  public function getTransaksiByCodePhone($code, $phone)
   {
-    return Transaksi::where('kode', $code)->where('email', $email)->where('nomor', $phone)->first();
+    return Transaksi::where('kode', $code)->where('nomor', $phone)->first();
   }
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Interfaces;
 
@@ -11,5 +11,5 @@ interface TransaksiRepositoryInterface {
 
   public function getTransaksiByCode($code);
 
-  public function getTransaksiByCodeEmailPhone($code, $email, $phone);
+  public function getTransaksiByCodePhone($code, $phone);
 }
