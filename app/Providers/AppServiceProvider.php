@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\DestinasiRepositoryInterface; // Import the interface
-use App\Repositories\DestinasiRepository;  
+use App\Repositories\DestinasiRepository;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (str_contains(request()->url(), 'ngrok-free.app')) {
+            URL::forceScheme('https');
+        }
     }
 }

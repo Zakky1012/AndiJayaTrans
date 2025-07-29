@@ -20,4 +20,6 @@ Route::post('/keberangkatan/booking/{nomorKeberangkatan}/save-passenger-details'
 Route::get('/keberangkatan/booking/{nomorKeberangkatan}/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
 Route::post('/keberangkatan/booking/{nomorKeberangkatan}/payment', [BookingController::class, 'payment'])->name('booking.payment');
 
+Route::get('/booking-success', [BookingController::class, 'success'])->name('booking.success');
+
 Route::get('/check-booking', [BookingController::class, 'checkBooking'])->name('booking.check');
