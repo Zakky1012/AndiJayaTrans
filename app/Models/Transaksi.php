@@ -29,7 +29,7 @@ class Transaksi extends Model
     }
 
     public function classKeberangkatan(){
-        return $this->belongsTo(ClassKeberangkatan::class);
+        return $this->belongsTo(ClassKeberangkatan::class, 'keberangkatan_class_id');
     }
 
     public function promoCode(){
