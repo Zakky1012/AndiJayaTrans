@@ -114,11 +114,16 @@ class BookingController extends Controller
         return view('pages.booking.check-booking');
     }
 
-    public function show(BookingShowRequest $request){
+    public function show(Request $request) {
+        $request->validate([
+            'code' => 'required|string',
+            'phone' => 'required|string',
+        ]);
+
         $transaction = $this->transaksiRepository->getTransaksiByCodePhone($request->code, $request->phone);
 
         if(!$transaction) {
-            return redirect()->back()->with('error', 'data transaksi tidak ditemukan');
+            return redirect()->back()->with('error', 'Data transaksi tidak ditemukan');
         }
 
         return view('pages.booking.detail', compact('transaction'));

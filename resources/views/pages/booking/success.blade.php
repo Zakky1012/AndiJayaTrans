@@ -150,7 +150,7 @@
                     <form action="{{ route('booking.show') }}" method="post">
                         @csrf
                         <input type="hidden" name="code" value="{{ $transaction->kode }}">
-                        <input type="hidden" name="nomor" value="{{ $transaction->nomor }}">
+                        <input type="hidden" name="phone" value="{{ $transaction->nomor }}">
                         <button type="submit" class="w-full rounded-full py-3 px-5 text-center bg-garuda-black ">
                             <span class="font-semibold text-white">View My Booking Details</span>
                         </button>
