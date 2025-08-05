@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TransactionSuccessMail;
+use App\Models\KursiKeberangkatan;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MidtransController extends Controller
 {
@@ -59,9 +62,13 @@ class MidtransController extends Controller
                 break;
             case 'settlement':
                 $transaction->update(['status_payment' => 'dibayar']);
+
                 foreach ($transaction->transaksiPessenger as $passenger) {
-                    $passenger->kursi->update(['is_available' => false]);
+                    KursiKeberangkatan::where('id', $passenger->kursi_keberangkatan_id)->update(['is_available' => false]);
                 }
+
+                Mail::to($transaction->email)->send(new TransactionSuccessMail($transaction));
+
                 break;
             case 'pending':
                 $transaction->update(['status_payment' => 'pending']);
